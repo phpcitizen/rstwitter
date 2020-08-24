@@ -87,7 +87,7 @@ defmodule RsTwitter do
 
   """
 
-  @twitter_url "https://api.twitter.com/1.1/"
+  @twitter_url "https://api.twitter.com/"
 
   @doc """
   Makes request to twitter API
@@ -135,6 +135,7 @@ defmodule RsTwitter do
   defp handle_response({:ok, response = %HTTPoison.Response{}}) do
     %{status_code: status_code, body: body, headers: headers} = response
     body = Poison.decode!(body)
+
     if status_code == 200 do
       {:ok, %RsTwitter.Response{status_code: status_code, body: body, headers: headers}}
     else
